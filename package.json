@@ -1,0 +1,23 @@
+{
+  "name": "dex-order-bot",
+  "version": "1.0.0",
+  "description": "A bot of creating order for DEX",
+  "main": "index.js",
+  "repository": "git@github.com:kellyshang/dex-order-bot.git",
+  "author": "kellyshang <https://github.com/kellyshang>",
+  "license": "MIT",
+  "scripts": {
+    "collectNormal": "node src/orders/collectAll.js collectNormal",
+    "collectUDT":"node src/orders/collectAll.js collectUDT",
+    "collectAll2UDT": "node src/orders/collectAll.js collectAll2UDT",
+    "splitNormal": "node src/orders/splitCell.js splitNormal",
+    "splitUDT": "node src/orders/splitCell.js splitUDT",
+    "batchBid": "node src/orders/index.js batchBid",
+    "batchAsk": "node src/orders/index.js batchAsk"
+  },
+  "dependencies": {
+    "@bandprotocol/bandchain.js": "^1.1.6",
+    "@ckb-lumos/indexer": "^0.14.0",
+    "@nervosnetwork/ckb-sdk-core": "^0.38.2"
+  }
+}
