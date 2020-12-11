@@ -12,7 +12,7 @@ const BOB_PRIV_KEY = '0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 
 const DEFAULT_LOCK_CELLDEP_OUTPOINT = {
   outPoint: {
-    txHash: '0xace5ea83c478bb866edf122ff862085789158f5cbff155b7bb5f13058555b708',
+    txHash: '0xf8de3bb47d055cdf460d93a2a6e1b05f7432f9777c8c474abf4eec1d4aee5d37',
     index: '0x0',
   },
   depType: 'depGroup', 
