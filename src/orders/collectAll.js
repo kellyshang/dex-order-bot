@@ -35,7 +35,7 @@ const bootstrap = async (command) => {
   }
   console.log(`totalInputAmount: ${totalInputAmount} ,
   totalUDTAmount: ${totalUDTAmount}`)
-  let fee = BigInt(1000);
+  let fee = BigInt(60000);
   let transferAmnt = BigInt(totalInputAmount) - fee; 
 
   let txParams = {

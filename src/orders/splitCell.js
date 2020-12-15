@@ -30,7 +30,7 @@ const bootstrap = async () => {
   let inputAmount = parseInt(unspentCells[0].capacity, 16)
   let udtInputAmount = BufferParser.parseAmountFromSUDTData(unspentCells[0].data);
   console.log(`udtInputAmount is: ${udtInputAmount}`)
-  let fee = 1000n;
+  let fee = 120000n;
   let transferAmnt = (BigInt(inputAmount) - fee)/splitNum;
   let transferUDTAmnt = udtInputAmount/splitNum;
 
@@ -59,8 +59,8 @@ if (command == SPLIT_UDT) {
       rawTx.outputs.push({
           lock: {
             args: unspentCells[0].lock.args,
-            codeHash: unspentCells[0].lock.codeHash,
-            hashType: unspentCells[0].lock.hashType,
+            codeHash: unspentCells[0].lock.code_hash,
+            hashType: unspentCells[0].lock.hash_type,
           }, 
           capacity: transferAmnt, 
       })
@@ -96,7 +96,7 @@ if (command == SPLIT_UDT) {
     `outputs capacity: ${rawTx.outputs.map(output => BigInt(output.capacity))}`,
   )
 
-  console.log(`split rawTX: ${JSON.stringify(rawTx)}`)
+  console.log("split rawTx is: ", rawTx)
 
   const signedTx = ckb.signTransaction(PRI_KEY)(rawTx)
   const txHash = await ckb.rpc.sendTransaction(signedTx)

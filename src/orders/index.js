@@ -220,17 +220,21 @@ const createSinglePendingOrderByIndex = async (order, signPrivateKey, index) => 
 };
 
 const sendOrder = async(marketPrice, orderAmount, isBidOrder, index) => {
-    let bidPrice = BigInt(marketPrice * 10 ** 20); 
-    console.log("marketPrice, bidPrice: ", marketPrice, bidPrice)
-    let askPrice = BigInt(marketPrice * 10 ** 20); 
+    console.log("input marketPrice, orderAmount: ", marketPrice, orderAmount, index)
+    let bidPrice = BigInt(marketPrice * 10 ** 10) * 10n**10n;; 
+    console.log("bidPrice: ", bidPrice)
+    let askPrice = BigInt(marketPrice * 10 ** 10) * 10n**10n; 
 
     let bidOrderAmount = BigInt(orderAmount * 10 ** 8); 
     console.log("orderAmount, bidOrderAmount: ", orderAmount, bidOrderAmount)
     let bidCKBAmount = (bidPrice * bidOrderAmount / 10n**20n);
     console.log("bidCKBAmount: ", bidCKBAmount);
 
-    let sudtCurrentAmount = 1n * 10n ** 8n; 
-    let askOrderAmount = BigInt(orderAmount * 10 ** 8); 
+    let askSUDTAmount = BigInt(orderAmount * 10 ** 8); // doesn't include fee
+    let askOrderAmount = (askSUDTAmount * askPrice / 10n**20n);
+    let askSUDTCurrentAmount = askSUDTAmount + (askSUDTAmount * 3n / 1000n); //include fee
+    console.log(`askPrice: ${askPrice}, askSUDTAmount: ${askSUDTAmount}, 
+    askOrderAmount: ${askOrderAmount}, askSUDTCurrentAmount: ${askSUDTCurrentAmount}`);
     
     const aliceOrder = {
         publicKeyHash: alicePWEthLockHash, 
@@ -242,7 +246,7 @@ const sendOrder = async(marketPrice, orderAmount, isBidOrder, index) => {
     };
     const bobOrder = {
         publicKeyHash: bobPWEthLockHash, 
-        sudtCurrentAmount: sudtCurrentAmount, 
+        sudtCurrentAmount: askSUDTCurrentAmount, 
         orderAmount: askOrderAmount, 
         price: askPrice,
         isBid: false,
@@ -256,8 +260,8 @@ const sendOrder = async(marketPrice, orderAmount, isBidOrder, index) => {
     }
 }
 
+beforePrepare();
 const start = async(marketPrice, ckbOrderAmount, isBidOrder, index) => {
-    await beforePrepare();
     await sendOrder(marketPrice, ckbOrderAmount, isBidOrder, index);
 }
 
@@ -271,7 +275,7 @@ let command = arguments[0];
 let tokenPair = arguments[1]
 console.log("input tokenPair: ", command, tokenPair);
 let targetPrice;
-let targetCKBOrderAmount;
+let targetUDTAmount;
 const {GetPrice} = require('../price');
 GetPrice.getTokensRate().then(
     res=>{ 
@@ -279,8 +283,8 @@ GetPrice.getTokensRate().then(
         console.log("pairInfo: ", pairInfo.pairvalue, pairInfo.rate, pairInfo.timestamp);
         for (let index = 0; index < SPLIT_CELLS_NUMBER; index++) {
             targetPrice = randomNum(0, pairInfo.rate);
-            targetCKBOrderAmount = randomNum(5, 10)
-            start(targetPrice, targetCKBOrderAmount, command, index);
+            targetUDTAmount = randomNum(10, 30);
+            start(targetPrice, targetUDTAmount, command, index);
         }
     }
 )

@@ -18,11 +18,11 @@ const DEFAULT_LOCK_CELLDEP_OUTPOINT = {
   depType: 'depGroup', 
 }
 
-const PW_LOCK_CODEHASH = '0xe6acf70d7e336db0368c920a833d9d9f9ca8c3c8aba39f24741c45db435c3e18'
+const PW_LOCK_CODEHASH = '0x58c5f491aba6d61678b7cf7edf4910b1f5e00ec0cde2f42e0abb4fd9aff25a63'
 const PW_LOCK_HASHTYPE = 'type'
 const PW_LOCK_CELLDEP_OUTPOINT = {
   outPoint: {
-    txHash: '0xe4ddfd424edc84211b35cca756ecf1f9708291cf15ae965e38afc45451c7aee1',
+    txHash: '0x57a62003daeab9d54aa29b944fc3b451213a5ebdf2e232216a3cfed0dde61b38',
     index: '0x0',
   },
   depType: 'code', 
@@ -41,11 +41,11 @@ const SUDT_TYPE_SCRIPT = {
   codeHash: '0xc5e5dcf215925f7ef4dfaf5f4b4f105bc321c02776d6e7d52a1db3fcd9d011a4',
 }
 
-const ORDERBOOK_LOCK_CODEHASH = '0xd3e1c2da541fa74b48e95378753a6e99166a8dc4c4d1b46f714615732460f48a'
+const ORDERBOOK_LOCK_CODEHASH = '0x279bee9fa98959029766c0e0ce19cd91b7180fd15b600a9e95140149b524c53b'
 const ORDERBOOK_LOCK_TYPE = 'type'
 const ORDERBOOK_CELLDEP_OUTPOINT = {
   outPoint: {
-    txHash: '0x5aabcb08b8ea52f6a46f4d878b8ff9534ed8d2a5003920d70d1ad400c268a7d3',
+    txHash: '0xca5a05802b7f93f4f3b5f371df0c7b6d5a05104563aabfa339747f78793b32f6',
     index: '0x0',
   },
   depType: 'code', 
